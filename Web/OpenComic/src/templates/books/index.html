@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+{% block body %}
+  
+<div class="container body-content">
+
+<h2>Books</h2>
+
+    <table class="table table-striped table-hover">
+    <tbody>
+
+    <tr>
+        <th></th>
+        <th>Book</th>
+        <th>Description</th>
+    </tr>
+
+    {% for book in books %}
+        <tr onclick="window.document.location='{{url_for('.details', name=book.name)}}';">
+            <td> <img class="thumbnail" src="{{url_for('book_mgr.thumbnail', name=book.thumbnail_filename)}}" width="64" height="64"> </td>
+            <td> 
+                <h3> 
+                    <a href="#">{{book.name}}</a>
+                    {% if book.has_new %} <small><span class="label label-success">New</span></small> {% endif %}
+                </h3> 
+            </td>
+            <td> {{book.description}} </td>
+        </tr>
+    {% endfor %}
+
+</tbody></table>
+
+    </div>
+
+{% endblock %}

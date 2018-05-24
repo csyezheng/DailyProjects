@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+{% block body %}
+  
+<div class="container body-content">
+        
+
+
+<h2>Crawler</h2>
+<hr/>
+    <p>
+        <a class="btn btn-default" href="{{url_for('.create')}}">Create New</a>
+    </p>
+    <table class="table table-striped table-hover">
+    <tbody>
+
+    <tr>
+        <th>Name</th>
+        <th>Author</th>
+        <th>LastModified</th>
+        <th></th>
+    </tr>
+
+    {% for crawler in crawlers %}
+        <tr>
+            <td> {{crawler.name}} </td>
+            <td> {{crawler.author_account}} </td>
+            <td>
+                {% if crawler.error_message %} <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> {% endif %}
+                {{crawler.last_modified}} 
+            </td>
+            <td>
+                <a class="btn btn-primary" href="{{url_for('.edit', name=crawler.name)}}">Edit</a>
+                <a class="btn btn-info" href="{{url_for('.details', name=crawler.name)}}">Details</a>
+                <a class="btn btn-danger" href="{{url_for('.delete', name=crawler.name)}}">Delete</a>
+            </td>
+        </tr>
+    {% endfor %}
+
+</tbody></table>
+
+    </div>
+
+{% endblock %}

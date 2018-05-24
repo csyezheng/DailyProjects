@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+
+{% block head %}
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.2.0/styles/default.min.css">
+
+{% endblock %}
+
+
+{% block body %}
+  
+<div class="container body-content">
+
+<h2>Details</h2>
+<hr/>
+ <div>
+    <h4>Crawler</h4>
+    <hr>
+    <dl class="dl-horizontal">
+        <dt>Name</dt>
+        <dd>{{crawler.name}}</dd>
+        <dt>Author</dt>
+        <dd>{{crawler.author_account}}</dd>
+        <dt>LastModified</dt>
+        <dd>{{crawler.last_modified}}</dd>
+        <div {% if not crawler.error_message %} class="hidden" {% endif %}>
+            <dt>Error Message</dt>
+            <dd><pre><code>{{crawler.error_message}}</code></pre></dd>
+        </div>
+        <dt>Source</dt>
+        <dd><pre><code class="python">{{ crawler.src_content }}</code></pre></dd>
+    </dl>
+</div>
+<hr/>
+<p>
+    <a class="btn btn-primary" href="{{url_for('.edit', name=crawler.name)}}">Edit</a> |
+    <a href="{{url_for('.index')}}">Back to List</a>
+</p>
+
+    </div>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.2.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+{% endblock %}
